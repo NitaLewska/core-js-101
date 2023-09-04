@@ -51,8 +51,8 @@ function getCircleCircumference(r) {
  *  10, 0  => 5
  *  -3, 3  => 0
  */
-function getAverage(/* value1, value2 */) {
-  throw new Error('Not implemented');
+function getAverage(x, y) {
+  return x === y ? x : (x + y) / 2;
 }
 
 /**
@@ -109,8 +109,10 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  *   (0,1) (1,2)     => 0
  */
-function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  let cos = 0;
+  cos = (x1 * x2 + y1 * y2) / ((Math.sqrt(x1 * x1 + y1 * y1)) * (Math.sqrt(x2 * x2 + y2 * y2)));
+  return Math.acos(cos);
 }
 
 /**
@@ -125,8 +127,8 @@ function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
  *     5     => 5
  *     0     => 0
  */
-function getLastDigit(/* value */) {
-  throw new Error('Not implemented');
+function getLastDigit(num) {
+  return parseInt(num.toString().split('')[num.toString().length - 1], 10);
 }
 
 
@@ -201,8 +203,19 @@ function roundToPowerOfTen(num, pow) {
  *   16 => false
  *   17 => true
  */
-function isPrime(/* n */) {
-  throw new Error('Not implemented');
+function isPrime(num) {
+  if (num === 2 || num === 3) {
+    return true;
+  }
+  if (num <= 1 || num % 2 === 0 || num % 3 === 0) {
+    return false;
+  }
+  for (let i = 5; i * i <= num; i += 6) {
+    if (num % i === 0 || num % (i + 2) === 0) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -220,8 +233,8 @@ function isPrime(/* n */) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  return parseInt(value, 10) ? parseInt(value, 10) : def;
 }
 
 module.exports = {

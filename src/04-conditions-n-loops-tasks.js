@@ -133,8 +133,14 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  const right1 = rect1.left + rect1.width;
+  const right2 = rect2.left + rect2.width;
+  const bottom1 = rect1.top + rect1.height;
+  const bottom2 = rect2.top + rect2.height;
+  const x = rect1.left < rect2.left ? right1 > rect2.left : right2 > rect1.left;
+  const y = rect1.top < rect2.top ? bottom1 > rect2.top : bottom2 > rect1.top;
+  return (x && y);
 }
 
 
@@ -183,8 +189,13 @@ function isInsideCircle({ center, radius }, { x, y }) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  for (let i = 0; i < str.length; i += 1) {
+    if (str.slice(0, i).concat(str.slice(i + 1)).indexOf(str[i]) === -1) {
+      return str[i];
+    }
+  }
+  return null;
 }
 
 
@@ -359,8 +370,15 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const splitPathes = pathes.map((a) => a.split('/'));
+  const common = [];
+  for (let i = 0; i < splitPathes[0].length; i += 1) {
+    if (splitPathes.every((a) => a[i] === splitPathes[0][i])) {
+      common.push(splitPathes[0][i]);
+    }
+  }
+  return common.length > 0 ? common.join('/').concat('/') : '';
 }
 
 
